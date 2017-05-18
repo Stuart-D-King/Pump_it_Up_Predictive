@@ -11,7 +11,6 @@ def read_data():
     df_status = pd.read_csv('Taarifa Status Dataset.csv')
     df_status = df_status.drop('id', axis=1)
     df = pd.concat([df_main, df_status], axis=1)
-
     return df
 
 def clean_df(df):

@@ -304,13 +304,15 @@ if __name__ == '__main__':
     if not os.path.exists(directory):
         os.makedirs(directory)
 
-    # df = read_data()
-    # df, labels, y_transformer = clean_df(df)
-    # df.to_pickle('df_taarifa.pkl')
+    if os.path.isfile('df_taarifa.pkl'):
+        df = pd.read_pickle('df_taarifa.pkl')
+    else:
+        df = read_data()
+        df, labels, y_transformer = clean_df(df)
+        df.to_pickle('df_taarifa.pkl')
 
     labels = np.array(['functional', 'functional needs repair', 'non functional'])
 
-    df = pd.read_pickle('df_taarifa.pkl')
     y = df.pop('status_group').values
     columns = df.columns.tolist()
     X = df.values

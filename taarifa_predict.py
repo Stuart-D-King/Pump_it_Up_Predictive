@@ -2,6 +2,7 @@
 import pickle
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.preprocessing import LabelEncoder
 
 def predict():
     directory = 'data'
@@ -14,10 +15,9 @@ def predict():
     result = model.score(X_test, y_test)
     predictions = model.predict(X_test).astype(int)
     transformed_predictions = y_transformer.inverse_transform(predictions)
+    np.savetxt('predict_results.csv', transformed_predictions, fmt='%s')
 
-    np.savetxt('predict_results.csv', transformed_predictions)
-
-    print('Accuracy: {}'.format(result))
+    print('Accuracy: {0:02f}'.format(result))
     print('Predictions:')
     print(transformed_predictions)
 
